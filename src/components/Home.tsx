@@ -1,44 +1,16 @@
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut } from "next-auth/react";
 
-import { trpc } from '../utils/trpc';
-import AddCommandModal from './AddCommandModal';
-import SpinnerOrLoad from './SpinnerOrLoad';
-import MyTable from './Table';
-
-const AuthHome = () => {
-  const commands = trpc.useQuery(['commands.getAll']);
-
-  return (
-    <div className="flex flex-col items-center justify-around min-h-screen">
-      <h1 className="font-extrabold text-center text-7xl">
-        <span className="text-blue-500">Ducky</span> Commands
-      </h1>
-
-      <SpinnerOrLoad isLoading={commands.data === undefined}>
-        {commands.data ? (
-          <MyTable commands={commands.data} updateCommands={commands.refetch} />
-        ) : (
-          <></>
-        )}
-      </SpinnerOrLoad>
-
-      <label htmlFor="inputCommandModal" className="btn modal-button">
-        Add Command
-      </label>
-
-      <AddCommandModal updateCommands={commands.refetch} />
-    </div>
-  );
-};
+import { trpc } from "../utils/trpc";
+import HomeAuth from "./HomeAuth";
 
 const Home = () => {
-  const auth = trpc.useQuery(['auth.getSession']);
+  const auth = trpc.useQuery(["auth.getSession"]);
   const session = auth.data;
 
   return (
     <>
       {session ? (
-        <AuthHome />
+        <HomeAuth />
       ) : (
         <div className="flex items-center justify-around min-h-full mt-96">
           <button
@@ -53,7 +25,7 @@ const Home = () => {
                   }
             }
           >
-            {session ? 'Sign Out' : 'Sign In'}
+            {session ? "Sign Out" : "Sign In"}
           </button>
         </div>
       )}
