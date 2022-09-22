@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: "Secret",
         },
       },
-      async authorize(credentials, _req) {
+      async authorize(credentials) {
         const secret = credentials?.secret;
         if (secret === env.SECRET_KEY)
           return {
