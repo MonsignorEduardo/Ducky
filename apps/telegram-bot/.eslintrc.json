@@ -1,0 +1,8 @@
+{
+  "extends": "./node_modules/gts/",
+  "settings": {
+    "node": {
+      "allowModules": ["@prisma/client"]
+    }
+  }
+}
