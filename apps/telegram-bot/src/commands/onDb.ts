@@ -1,7 +1,7 @@
 import { Command as DbCommand } from '@prisma/client';
 import { CommandContext } from 'grammy';
 
-import { MyContext } from '../models/Contex';
+import { MyContext } from '../models/Context';
 import { UserCommand } from '../models/DataComand';
 import { inTime } from './helper';
 import { prisma } from './prisma';
@@ -11,9 +11,7 @@ let storedCommands: DbCommand[] = [];
 async function populate(ctx: CommandContext<MyContext>) {
     const response = await ctx.reply('Populating ....');
     storedCommands = await prisma.command.findMany();
-    await response.editText(
-        `${storedCommands.length} Comandos actualizados e importados`
-    );
+    await response.editText(`${storedCommands.length} Comandos actualizados e importados`);
 }
 
 async function create(ctx: CommandContext<MyContext>) {
@@ -28,16 +26,12 @@ async function create(ctx: CommandContext<MyContext>) {
         },
     });
     storedCommands.push(responseText);
-    await ctxResponse.editText(
-        `Comando  creado con éxito 🤗 ${JSON.stringify(responseText)}`
-    );
+    await ctxResponse.editText(`Comando  creado con éxito 🤗 ${JSON.stringify(responseText)}`);
 }
 
 async function executeCommandDB(ctx: MyContext) {
     const data = await getDataCommand(ctx);
-    console.info(
-        `Received msg from ${ctx.from?.username} with message ${ctx.message?.text}`
-    );
+    console.info(`Received msg from ${ctx.from?.username} with message ${ctx.message?.text}`);
     if (data && data.inTime) {
         const { command, message_id } = data;
         console.info(`Executing command ${command.matches}`);

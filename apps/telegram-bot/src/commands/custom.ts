@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import axios from 'axios';
 import { CommandContext } from 'grammy';
 
-import { MyContext } from '../models/Contex';
+import { MyContext } from '../models/Context';
 
 function getVersion(ctx: CommandContext<MyContext>) {
     ctx.reply('La version es 🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻 ' + 1);
@@ -11,9 +11,7 @@ function getVersion(ctx: CommandContext<MyContext>) {
 async function getMeme(ctx: CommandContext<MyContext>) {
     try {
         console.log('Get meme Command from ' + ctx.message?.from.username);
-        const response = await axios.get(
-            'https://meme-api.herokuapp.com/gimme'
-        );
+        const response = await axios.get('https://meme-api.herokuapp.com/gimme');
         const { url } = response.data;
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

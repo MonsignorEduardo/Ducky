@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["grammy", "grammyjs", "superjson", "trpc"],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.workingDirectories": ["./apps/telegram-bot", "./apps/web"]
+    "cSpell.words": ["grammy", "grammyjs", "superjson", "tailwindcss", "trpc"],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "eslint.workingDirectories": ["./apps/telegram-bot", "./apps/web"]
 }
