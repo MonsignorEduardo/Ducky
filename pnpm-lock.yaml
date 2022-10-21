@@ -7,10 +7,12 @@ importers:
       '@prisma/client': ^4.3.1
       prettier: latest
       prisma: ^4.3.1
+      rimraf: ^3.0.2
       turbo: ^1.5.5
       typescript: ^4.8.4
     dependencies:
       '@prisma/client': 4.3.1_prisma@4.3.1
+      rimraf: 3.0.2
     devDependencies:
       prettier: 2.7.1
       prisma: 4.3.1
@@ -27,6 +29,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.39.0
       '@typescript-eslint/parser': ^5.39.0
       axios: ^0.27.2
+      dotenv: ^16.0.3
       eslint: ^8.0.1
       express: ^4.18.1
       grammy: ^1.11.1
@@ -36,6 +39,7 @@ importers:
       '@faker-js/faker': 7.5.0
       '@grammyjs/hydrate': 1.2.0_grammy@1.11.1
       axios: 0.27.2
+      dotenv: 16.0.3
       express: 4.18.1
       grammy: 1.11.1
     devDependencies:
@@ -128,7 +132,7 @@ importers:
       eslint: 8.24.0
       eslint-config-prettier: 8.5.0_eslint@8.24.0
       eslint-config-turbo: 0.0.4_eslint@8.24.0
-      eslint-plugin-react: 7.31.8_eslint@8.24.0
+      eslint-plugin-react: 7.31.10_eslint@8.24.0
 
 packages:
 
@@ -1308,6 +1312,11 @@ packages:
       esutils: 2.0.3
     dev: true
 
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
+
   /dynamic-dedupe/0.3.0:
     resolution: {integrity: sha512-ssuANeD+z97meYOqd50e04Ze5qp4bPqo8cCkI4TRjZkzAUgIDTrXV1R8QCdINpiI+hw14+rYazvTRdQrz0/rFQ==}
     dependencies:
@@ -1405,7 +1414,7 @@ packages:
       eslint-import-resolver-typescript: 2.7.1_2iahngt3u2tkbdlu6s4gkur3pu
       eslint-plugin-import: 2.26.0_q4brmuik2q4s5ajvp5b2ufh23e
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.22.0
-      eslint-plugin-react: 7.31.8_eslint@8.22.0
+      eslint-plugin-react: 7.31.10_eslint@8.22.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.22.0
       typescript: 4.8.4
     transitivePeerDependencies:
@@ -1610,8 +1619,8 @@ packages:
       eslint: 8.22.0
     dev: true
 
-  /eslint-plugin-react/7.31.8_eslint@8.22.0:
-    resolution: {integrity: sha512-5lBTZmgQmARLLSYiwI71tiGVTLUuqXantZM6vlSY39OaDSV0M7+32K5DnLkmFrwTe+Ksz0ffuLUC91RUviVZfw==}
+  /eslint-plugin-react/7.31.10_eslint@8.22.0:
+    resolution: {integrity: sha512-e4N/nc6AAlg4UKW/mXeYWd3R++qUano5/o+t+wnWxIf+bLsOaH3a4q74kX3nDjYym3VBN4HyO9nEn1GcAqgQOA==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -1633,8 +1642,8 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: true
 
-  /eslint-plugin-react/7.31.8_eslint@8.24.0:
-    resolution: {integrity: sha512-5lBTZmgQmARLLSYiwI71tiGVTLUuqXantZM6vlSY39OaDSV0M7+32K5DnLkmFrwTe+Ksz0ffuLUC91RUviVZfw==}
+  /eslint-plugin-react/7.31.10_eslint@8.24.0:
+    resolution: {integrity: sha512-e4N/nc6AAlg4UKW/mXeYWd3R++qUano5/o+t+wnWxIf+bLsOaH3a4q74kX3nDjYym3VBN4HyO9nEn1GcAqgQOA==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8

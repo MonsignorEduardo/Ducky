@@ -15,10 +15,12 @@
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "postinstall": "prisma generate",
         "db:push": "prisma db push",
-        "db:seed": "prisma db seed"
+        "db:seed": "prisma db seed",
+        "clean" :  "rimraf ./**/node_modules"
     },
     "dependencies": {
-        "@prisma/client": "^4.3.1"
+        "@prisma/client": "^4.3.1",
+        "rimraf": "^3.0.2"
     },
     "devDependencies": {
         "prettier": "latest",
