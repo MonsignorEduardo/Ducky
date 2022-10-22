@@ -29,6 +29,7 @@ export class DuckyBot {
                 description: 'Crea un comando personalizado uso create name-value',
             },
         ]);
+
         // Commands
         this.bot.command('version', getVersion, clearCtx);
         this.bot.command('meme', getMeme, clearCtx);
