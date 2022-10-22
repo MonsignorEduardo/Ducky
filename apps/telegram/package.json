@@ -34,5 +34,9 @@
         "dotenv": "^16.0.3",
         "express": "^4.18.1",
         "grammy": "^1.11.1"
-    }
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "packageManager": "pnpm@7.11.0"
 }
