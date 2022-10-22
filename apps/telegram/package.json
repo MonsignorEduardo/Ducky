@@ -1,5 +1,5 @@
 {
-    "name": "@ducky/telegram-bot",
+    "name": "@ducky/telegram",
     "version": "0.0.0",
     "description": "",
     "main": "build/index.js",
