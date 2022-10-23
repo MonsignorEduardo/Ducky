@@ -10,7 +10,7 @@ export interface TableProps {
 }
 
 function MyTable({ commands, updateCommands }: TableProps) {
-    const deleteCommand = trpc.useMutation(['commands.delete']);
+    const deleteCommand = trpc.commands.delete.useMutation();
 
     useEffect(() => {
         if (deleteCommand.error) {
@@ -27,30 +27,30 @@ function MyTable({ commands, updateCommands }: TableProps) {
     const getLine = (command: Command) => (
         <tr
             key={command.id}
-            className=" flex lg:table-row flex-row lg:flex-row flex-wrap border border-b lg:flex-no-wrap mb-10 lg:mb-0 ">
-            <td className="w-full lg:w-auto p-3 text-gray-800 text-center lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
+            className=" lg:flex-no-wrap mb-10 flex flex-row flex-wrap border border-b lg:mb-0 lg:table-row lg:flex-row ">
+            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
                     Matches
                 </span>
-                <div className="text-blue-200 text-right">{command.matches}</div>
+                <div className="text-right text-blue-200">{command.matches}</div>
             </td>
 
-            <td className="w-full lg:w-auto p-3 text-gray-800 text-center lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
+            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
                     Response
                 </span>
-                <div className="text-blue-200 text-right">{command.response}</div>
+                <div className="text-right text-blue-200">{command.response}</div>
             </td>
 
-            <td className="w-full lg:w-auto p-3 text-gray-800 text-center lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
+            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
                     Last Call
                 </span>
-                <div className="text-blue-200 text-right">{command.lastCall.toLocaleString()}</div>
+                <div className="text-right text-blue-200">{command.lastCall.toLocaleString()}</div>
             </td>
 
-            <td className="w-full lg:w-auto p-3 text-gray-800 text-center lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top- left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
+            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="top- absolute left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
                     Actions
                 </span>
                 <button
@@ -74,13 +74,13 @@ function MyTable({ commands, updateCommands }: TableProps) {
         </tr>
     );
     return (
-        <table className="table border-collapse w-fit">
+        <table className="table w-fit border-collapse">
             <thead>
                 <tr>
-                    <th className="p-3 hidden lg:table-cell">Matches</th>
-                    <th className="p-3 hidden lg:table-cell">Response</th>
-                    <th className="p-3 hidden lg:table-cell">Last Call</th>
-                    <th className="p-3 hidden lg:table-cell">Actions</th>
+                    <th className="hidden p-3 lg:table-cell">Matches</th>
+                    <th className="hidden p-3 lg:table-cell">Response</th>
+                    <th className="hidden p-3 lg:table-cell">Last Call</th>
+                    <th className="hidden p-3 lg:table-cell">Actions</th>
                 </tr>
             </thead>
             <tbody>{commands && commands.map((command) => getLine(command))}</tbody>

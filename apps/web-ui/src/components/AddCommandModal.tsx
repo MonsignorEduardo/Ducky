@@ -10,7 +10,7 @@ export interface AddCommandModalProps {
 }
 
 export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
-    const addCommand = trpc.useMutation(['commands.add']);
+    const addCommand = trpc.commands.add.useMutation();
 
     const [command, setCommand] = useState<Pick<Command, 'matches' | 'response'>>({
         matches: '',
@@ -48,7 +48,7 @@ export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
 
                     <form onSubmit={onSubmit}>
                         <div className="mb-6">
-                            <label htmlFor="large-input" className="block mb-2 text-sm font-medium">
+                            <label htmlFor="large-input" className="mb-2 block text-sm font-medium">
                                 Matches
                             </label>
                             <input
@@ -56,15 +56,18 @@ export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
                                 id="large-input"
                                 value={command.matches}
                                 onChange={(e) =>
-                                    setCommand({ ...command, matches: e.target.value })
+                                    setCommand({
+                                        ...command,
+                                        matches: e.target.value,
+                                    })
                                 }
-                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             />
                         </div>
                         <div className="mb-6">
                             <label
                                 htmlFor="large-input"
-                                className="block mb-2 text-sm font-medium ">
+                                className="mb-2 block text-sm font-medium ">
                                 Response
                             </label>
                             <input
@@ -72,16 +75,19 @@ export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
                                 id="large-input"
                                 value={command.response}
                                 onChange={(e) =>
-                                    setCommand({ ...command, response: e.target.value })
+                                    setCommand({
+                                        ...command,
+                                        response: e.target.value,
+                                    })
                                 }
-                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             />
                         </div>
 
                         <button
                             type="submit"
                             disabled={addCommand.isLoading}
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto">
                             Submit
                         </button>
                     </form>

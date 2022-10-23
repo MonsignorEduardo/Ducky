@@ -4,7 +4,7 @@ import { trpc } from '../utils/trpc';
 import HomeAuth from './HomeAuth';
 
 const Home = () => {
-    const auth = trpc.useQuery(['auth.getSession']);
+    const auth = trpc.auth.getSession.useQuery();
     const session = auth.data;
 
     return (
@@ -12,7 +12,7 @@ const Home = () => {
             {session ? (
                 <HomeAuth />
             ) : (
-                <div className="flex items-center justify-around min-h-full mt-96">
+                <div className="mt-96 flex min-h-full items-center justify-around">
                     <button
                         className="btn"
                         onClick={
