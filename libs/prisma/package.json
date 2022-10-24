@@ -1,6 +1,5 @@
 {
     "name": "@ducky/prisma",
-    "packageManager": "pnpm@7.11.0",
     "private": true,
     "main": "build/prisma.js",
     "types": "build/prisma.d.js",
@@ -27,5 +26,6 @@
     "prisma": {
         "schema": "./prisma/schema.prisma",
         "seed": "ts-node ./prisma/seed.ts"
-    }
+    },
+    "packageManager": "pnpm@7.13.2"
 }

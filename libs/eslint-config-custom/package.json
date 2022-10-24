@@ -11,5 +11,6 @@
         "eslint-plugin-import": "*",
         "eslint-plugin-simple-import-sort": "*",
         "typescript": "*"
-    }
+    },
+    "packageManager": "pnpm@7.13.2"
 }
