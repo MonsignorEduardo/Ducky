@@ -1,0 +1,22 @@
+{
+    "name": "example",
+    "version": "1.0.0",
+    "description": "example",
+    "main": "./build/index.js",
+    "scripts": {
+        "build": "tsup",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@ducky/eslint-config-custom": "workspace:*",
+        "tsup": "^6.3.0"
+    },
+    "peerDependencies": {
+        "typescript": "*"
+    },
+    "dependencies": {
+        "node-fetch": "2.6.7"
+    }
+}

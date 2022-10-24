@@ -1,12 +1,12 @@
 // /* eslint-disable simple-import-sort/imports */
 // Prisma adapter for NextAuth, optional and can be removed
 
+import { prisma } from '@ducky/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 
 import { env } from '../../../env/server.mjs';
-import { prisma } from '../../../server/db/client';
 
 export const authOptions: NextAuthOptions = {
     // Include user.id on session

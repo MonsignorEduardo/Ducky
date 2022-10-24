@@ -2,10 +2,6 @@
     "name": "ducky",
     "version": "0.0.0",
     "private": true,
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
     "scripts": {
         "build": "turbo run build",
         "build:telegram": "turbo run build --filter @ducky/telegram",
@@ -13,23 +9,18 @@
         "dev": "turbo run dev --parallel",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "postinstall": "prisma generate",
-        "db:push": "prisma db push",
-        "db:seed": "prisma db seed",
         "clean": "rimraf ./**/node_modules",
         "start:telegram": "turbo run start --filter @ducky/telegram"
     },
     "dependencies": {
-        "@prisma/client": "^4.5.0",
         "rimraf": "^3.0.2"
     },
     "devDependencies": {
         "prettier": "latest",
-        "prisma": "^4.5.0",
-        "turbo": "^1.5.5",
+        "turbo": "^1.6.1",
         "typescript": "^4.8.4"
     },
-   "engines": {
+    "engines": {
         "node": ">=16.0.0"
     },
     "packageManager": "pnpm@7.11.0"

@@ -18,10 +18,10 @@ const Home = () => {
                         onClick={
                             session
                                 ? () => {
-                                      signOut();
+                                      void signOut();
                                   }
                                 : () => {
-                                      signIn();
+                                      void signIn();
                                   }
                         }>
                         {session ? 'Sign Out' : 'Sign In'}

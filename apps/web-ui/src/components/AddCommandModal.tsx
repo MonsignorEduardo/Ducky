@@ -1,16 +1,12 @@
-import { Command } from '@prisma/client';
+import { Command } from '@ducky/prisma/prisma-client';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { trpc } from '../utils/trpc';
 
-/* eslint-disable-next-line */
-export interface AddCommandModalProps {
-    updateCommands: () => void;
-}
-
-export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
+export function AddCommandModal() {
     const addCommand = trpc.commands.add.useMutation();
+    const { refetch: commandsRefetch } = trpc.commands.getAll.useQuery();
 
     const [command, setCommand] = useState<Pick<Command, 'matches' | 'response'>>({
         matches: '',
@@ -29,8 +25,11 @@ export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
             toast.error("This didn't work.");
         }
         if (addCommand.data) {
-            updateCommands();
-            toast.success('Command Created');
+            commandsRefetch()
+                .then(() => toast.success('Command Deleted'))
+                .catch(() => {
+                    toast.error("This didn't work.");
+                });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [addCommand.data, addCommand.error]);
@@ -42,7 +41,7 @@ export function AddCommandModal({ updateCommands }: AddCommandModalProps) {
                 <div className="modal-box relative">
                     <label
                         htmlFor="inputCommandModal"
-                        className="btn btn-sm btn-circle absolute right-2 top-2">
+                        className="btn-sm btn-circle btn absolute right-2 top-2">
                         ✕
                     </label>
 

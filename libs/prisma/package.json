@@ -1,0 +1,35 @@
+{
+    "name": "@ducky/prisma",
+    "packageManager": "pnpm@7.11.0",
+    "private": true,
+    "main": "build/prisma.js",
+    "types": "build/prisma.d.js",
+    "scripts": {
+        "postinstall": "run-s generate build",
+        "prebuild": "rimraf dist",
+        "build": "tsc -p tsconfig.json",
+        "build:watch": "tsc -p tsconfig.json -w --preserveWatchOutput",
+        "dev": "cross-env NODE_ENV=development run-s generate build:watch",
+        "studio": "pnpm prisma studio",
+        "generate": "pnpm prisma generate",
+        "generate:watch": "pnpm prisma generate --watch",
+        "seed": "pnpm prisma db seed"
+    },
+    "devDependencies": {
+        "@ducky/eslint-config-custom": "workspace:*",
+        "@types/node": "^16.11.5",
+        "cross-env": "^7.0.3",
+        "npm-run-all": "^4.1.5",
+        "prisma": "^4.5.0",
+        "rimraf": "^3.0.2",
+        "ts-node": "^10.4.0"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.5.0",
+        "dotenv": "^16.0.3"
+    },
+    "prisma": {
+        "schema": "./prisma/schema.prisma",
+        "seed": "ts-node ./prisma/seed.ts"
+    }
+}

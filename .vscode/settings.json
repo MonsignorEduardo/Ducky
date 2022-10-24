@@ -1,15 +1,16 @@
 {
     "cSpell.words": [
+        "axiomhq",
         "envalid",
         "grammy",
         "grammyjs",
+        "Myriam",
         "superjson",
         "tailwindcss",
-        "trpc"
+        "tanstack",
+        "trpc",
+        "tsup"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",
-    "eslint.workingDirectories": [
-        "./apps/telegram",
-        "./apps/web-ui"
-    ]
+    "eslint.workingDirectories": [{ "mode": "auto" }]
 }

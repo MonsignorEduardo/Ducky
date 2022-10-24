@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@ducky/prisma/prisma-client';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 

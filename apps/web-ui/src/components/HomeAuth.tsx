@@ -13,18 +13,14 @@ const AuthHome = () => {
             </h1>
 
             <SpinnerOrLoad isLoading={commands.data === undefined}>
-                {commands.data ? (
-                    <MyTable commands={commands.data} updateCommands={commands.refetch} />
-                ) : (
-                    <></>
-                )}
+                {commands.data ? <MyTable commands={commands.data} /> : <></>}
             </SpinnerOrLoad>
 
-            <label htmlFor="inputCommandModal" className="btn modal-button">
+            <label htmlFor="inputCommandModal" className="modal-button btn">
                 Add Command
             </label>
 
-            <AddCommandModal updateCommands={commands.refetch} />
+            <AddCommandModal />
         </div>
     );
 };

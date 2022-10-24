@@ -1,18 +1,15 @@
-import { Command } from '@prisma/client';
+import { Command } from '@ducky/prisma/prisma-client';
+
+import { logger } from '../Logger';
 
 export const inTime = (comando: Command): boolean => {
     const tActual = new Date();
     const mTms = 60000;
-    console.log(
-        'Tactual  ' + (tActual.getTime() - comando.lastCall.getTime()) / mTms
-    );
+    logger.info(`inTime | Tactual  ${(tActual.getTime() - comando.lastCall.getTime()) / mTms}`);
 
-    if (
-        tActual.getTime() - comando.lastCall.getTime() >=
-        comando.timer * mTms
-    ) {
+    if (tActual.getTime() - comando.lastCall.getTime() >= comando.timer * mTms) {
         comando.lastCall = tActual;
-        console.log('ultima  ' + comando.lastCall.getTime() / mTms);
+        logger.info(`inTime | Ultima  ${comando.lastCall.getTime() / mTms}`);
 
         return true;
     }

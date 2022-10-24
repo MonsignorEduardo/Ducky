@@ -1,10 +1,11 @@
-import { Command as DbCommand } from '@prisma/client';
+import { prisma } from '@ducky/prisma';
+import { Command as DbCommand } from '@ducky/prisma/prisma-client';
 import { CommandContext } from 'grammy';
 
+import { logger } from '../Logger';
 import { MyContext } from '../models/Context';
 import { UserCommand } from '../models/DataComand';
 import { inTime } from './helper';
-import { prisma } from './prisma';
 
 let storedCommands: DbCommand[] = [];
 
@@ -31,33 +32,37 @@ async function create(ctx: CommandContext<MyContext>) {
 
 async function executeCommandDB(ctx: MyContext) {
     const data = await getDataCommand(ctx);
-    console.info(`Received msg from ${ctx.from?.username} with message ${ctx.message?.text}`);
+    logger.info(
+        `ExecuteCommandDB | Received msg from ${ctx.from?.username ?? 'Pepe'} with message ${
+            ctx.message?.text ?? 'Tus muertos'
+        }`
+    );
     if (data && data.inTime) {
         const { command, message_id } = data;
-        console.info(`Executing command ${command.matches}`);
+        logger.info(`executeCommandDB Executing command ${command.matches}`);
         switch (command.type) {
             case 'sticker':
-                ctx.replyWithSticker(command.response, {
+                await ctx.replyWithSticker(command.response, {
                     reply_to_message_id: message_id,
                 });
                 break;
             case 'text':
-                ctx.reply(command.response, {
+                await ctx.reply(command.response, {
                     reply_to_message_id: message_id,
                 });
                 break;
             case 'video':
-                ctx.replyWithVideo(command.response, {
+                await ctx.replyWithVideo(command.response, {
                     reply_to_message_id: message_id,
                 });
                 break;
             case 'foto':
-                ctx.replyWithPhoto(command.response, {
+                await ctx.replyWithPhoto(command.response, {
                     reply_to_message_id: message_id,
                 });
                 break;
             case 'audio':
-                ctx.replyWithAudio(command.response, {
+                await ctx.replyWithAudio(command.response, {
                     reply_to_message_id: message_id,
                 });
                 break;
@@ -66,7 +71,7 @@ async function executeCommandDB(ctx: MyContext) {
         }
 
         if (command.extraResponse && command.type !== 'sticker') {
-            ctx.reply(command.extraResponse, {
+            await ctx.reply(command.extraResponse, {
                 reply_to_message_id: message_id,
             });
         }

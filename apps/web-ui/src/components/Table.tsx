@@ -1,4 +1,4 @@
-import { Command } from '@prisma/client';
+import { Command } from '@ducky/prisma/prisma-client';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -6,20 +6,22 @@ import { trpc } from '../utils/trpc';
 
 export interface TableProps {
     commands: Command[] | undefined;
-    updateCommands: () => void;
 }
 
-function MyTable({ commands, updateCommands }: TableProps) {
+function MyTable({ commands }: TableProps) {
     const deleteCommand = trpc.commands.delete.useMutation();
-
+    const { refetch: commandsRefetch } = trpc.commands.getAll.useQuery();
     useEffect(() => {
         if (deleteCommand.error) {
             console.log('ojo');
             toast.error("This didn't work.");
         }
         if (deleteCommand.data) {
-            updateCommands();
-            toast.success('Command Deleted');
+            commandsRefetch()
+                .then(() => toast.success('Command Deleted'))
+                .catch(() => {
+                    toast.error("This didn't work.");
+                });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleteCommand.data, deleteCommand.error]);
@@ -54,7 +56,7 @@ function MyTable({ commands, updateCommands }: TableProps) {
                     Actions
                 </span>
                 <button
-                    className="btn btn-square"
+                    className="btn-square btn"
                     onClick={() => deleteCommand.mutate({ id: command.id })}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
