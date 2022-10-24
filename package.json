@@ -4,13 +4,13 @@
     "private": true,
     "scripts": {
         "build": "turbo run build",
+        "db-generate": "turbo run db-generate",
         "build:telegram": "turbo run build --filter @ducky/telegram",
         "build:web-ui": "turbo run build --filter @ducky/web-ui",
         "dev": "turbo run dev --parallel",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "clean": "rimraf ./**/node_modules",
-        "start:telegram": "turbo run start --filter @ducky/telegram"
+        "clean": "rimraf ./**/node_modules"
     },
     "dependencies": {
         "rimraf": "^3.0.2"
@@ -23,5 +23,5 @@
     "engines": {
         "node": ">=16.0.0"
     },
-    "packageManager": "pnpm@7.11.0"
+    "packageManager": "pnpm@7.13.4"
 }

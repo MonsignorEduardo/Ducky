@@ -1,4 +1,4 @@
-import { Command } from '@ducky/prisma/prisma-client';
+import { Command } from '@prisma/client';
 
 import { logger } from '../Logger';
 

@@ -1,4 +1,4 @@
-import { Command as DbCommand } from '../../../../libs/prisma/prisma-client';
+import { Command as DbCommand } from '@prisma/client';
 
 export type UserCommand = {
     bot: false;

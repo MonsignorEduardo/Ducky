@@ -1,5 +1,5 @@
 import { prisma } from '@ducky/prisma';
-import { Command as DbCommand } from '@ducky/prisma/prisma-client';
+import { Command as DbCommand } from '@prisma/client/';
 import { CommandContext } from 'grammy';
 
 import { logger } from '../Logger';
