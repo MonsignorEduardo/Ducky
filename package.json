@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "build": "turbo run build",
-        "db-generate": "turbo run db-generate",
+        "postinstall": "prisma generate",
         "build:telegram": "turbo run build --filter @ducky/telegram",
         "build:web-ui": "turbo run build --filter @ducky/web-ui",
         "dev": "turbo run dev --parallel",
@@ -13,15 +13,17 @@
         "clean": "rimraf ./**/node_modules"
     },
     "dependencies": {
+        "@prisma/client": "^4.5.0",
         "rimraf": "^3.0.2"
     },
     "devDependencies": {
         "prettier": "latest",
+        "prisma": "^4.5.0",
         "turbo": "^1.6.1",
         "typescript": "^4.8.4"
     },
     "engines": {
         "node": ">=16.0.0"
     },
-    "packageManager": "pnpm@7.13.2"
+    "packageManager": "pnpm@7.13.5"
 }

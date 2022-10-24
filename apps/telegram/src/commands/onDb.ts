@@ -1,7 +1,7 @@
-import { prisma } from '@ducky/prisma';
 import { Command as DbCommand } from '@prisma/client/';
 import { CommandContext } from 'grammy';
 
+import { prisma } from '../db/prisma';
 import { logger } from '../Logger';
 import { MyContext } from '../models/Context';
 import { UserCommand } from '../models/DataComand';
