@@ -1,13 +1,12 @@
-import { Command as DbCommand } from '@prisma/client/';
+import { Command, prisma } from '@ducky/db';
 import { CommandContext } from 'grammy';
 
-import { prisma } from '../db/prisma';
 import { logger } from '../Logger';
 import { MyContext } from '../models/Context';
 import { UserCommand } from '../models/DataComand';
 import { inTime } from './helper';
 
-let storedCommands: DbCommand[] = [];
+let storedCommands: Command[] = [];
 
 async function populate(ctx: CommandContext<MyContext>) {
     const response = await ctx.reply('Populating ....');

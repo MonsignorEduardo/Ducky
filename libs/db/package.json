@@ -1,22 +1,22 @@
 {
-    "name": "example",
+    "name": "@ducky/db",
     "version": "1.0.0",
     "description": "example",
     "main": "./build/index.js",
     "scripts": {
-        "build": "tsup",
+        "build": "prisma generate && tsc",
+        "db-generate": "prisma generate",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
         "@ducky/eslint-config-custom": "workspace:*",
-        "tsup": "^6.3.0"
-    },
-    "peerDependencies": {
-        "typescript": "*"
+        "@types/node": "^18.11.5",
+        "prisma": "^4.5.0",
+        "typescript": "^4.8.4"
     },
     "dependencies": {
-        "node-fetch": "2.6.7"
+        "@prisma/client": "^4.5.0"
     }
 }

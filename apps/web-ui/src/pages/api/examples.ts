@@ -1,7 +1,6 @@
 // src/pages/api/examples.ts
+import { prisma } from '@ducky/db';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-import { prisma } from '../../db/prisma';
 
 const examples = async (req: NextApiRequest, res: NextApiResponse) => {
     const examples = await prisma.example.findMany();

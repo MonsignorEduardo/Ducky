@@ -1,9 +1,9 @@
 // src/server/router/context.ts
+import { prisma } from '@ducky/db';
 import type { inferAsyncReturnType } from '@trpc/server';
 import type { CreateNextContextOptions } from '@trpc/server/adapters/next';
 import type { Session } from 'next-auth';
 
-import { prisma } from '../../db/prisma';
 import { getServerAuthSession } from '../common/get-server-auth-session';
 
 type CreateContextOptions = {

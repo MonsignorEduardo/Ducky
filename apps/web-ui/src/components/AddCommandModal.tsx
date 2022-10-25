@@ -1,4 +1,4 @@
-import { Command } from '@prisma/client';
+import { Command } from '@ducky/db';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
