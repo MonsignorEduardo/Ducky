@@ -16,7 +16,8 @@
             "cache": false
         },
         "db-generate": {
-            "cache": false
+            "outputs": ["./node_modules/prisma/prisma-client/"],
+            "cache": true
         },
         "db-push": {
             "cache": false
