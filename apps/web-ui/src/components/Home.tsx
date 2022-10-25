@@ -1,4 +1,5 @@
 import { signIn, signOut } from 'next-auth/react';
+import { log } from 'next-axiom';
 
 import { trpc } from '../utils/trpc';
 import HomeAuth from './HomeAuth';
@@ -6,7 +7,7 @@ import HomeAuth from './HomeAuth';
 const Home = () => {
     const auth = trpc.auth.getSession.useQuery();
     const session = auth.data;
-
+    log.debug('User session in', { session });
     return (
         <>
             {session ? (
