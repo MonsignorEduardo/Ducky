@@ -2,6 +2,10 @@
     "name": "ducky",
     "version": "0.0.0",
     "private": true,
+    "workspaces": [
+        "apps/*",
+        "libs/*"
+    ],
     "scripts": {
         "db-generate": "turbo db-generate",
         "db-push": "turbo db-push",
