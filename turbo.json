@@ -16,7 +16,7 @@
             "cache": false
         },
         "db-generate": {
-            "cache": true
+            "cache": false
         },
         "db-push": {
             "cache": false
