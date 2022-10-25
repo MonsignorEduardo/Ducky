@@ -5,7 +5,6 @@ import { prisma } from '@ducky/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
-import { log } from 'next-axiom';
 
 import { env } from '../../../env/server.mjs';
 
@@ -16,7 +15,6 @@ export const authOptions: NextAuthOptions = {
             if (session.user) {
                 session.user.id = user.id;
             }
-            log.debug('Auth session', { session, user });
             return session;
         },
     },
