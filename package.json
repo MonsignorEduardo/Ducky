@@ -12,11 +12,8 @@
         "build": "turbo build",
         "dev": "turbo dev --parallel",
         "clean:workspaces": "turbo clean",
-        "clean": "rimraf ./**/node_modules ./**/.turbo ./**/.vercel",
+        "clean": "rm -rf ./node_modules ./.turbo ./.vercel",
         "lint": "turbo lint"
-    },
-    "dependencies": {
-        "rimraf": "^3.0.2"
     },
     "devDependencies": {
         "prettier": "latest",
