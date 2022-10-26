@@ -14,5 +14,6 @@ app.listen(port, () => {
 });
 
 app.get('/health', (req, res) => {
+    logger.debug(`Health request ${req.headers}`);
     res.sendStatus(200);
 });
