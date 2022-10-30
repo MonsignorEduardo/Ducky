@@ -1,15 +1,18 @@
 {
     "cSpell.words": [
         "axiomhq",
+        "discordapp",
         "envalid",
         "grammy",
         "grammyjs",
         "Myriam",
+        "supergroup",
         "superjson",
         "tailwindcss",
         "tanstack",
         "trpc",
-        "tsup"
+        "tsup",
+        "updatecumple"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",
     "eslint.workingDirectories": [{ "mode": "auto" }]

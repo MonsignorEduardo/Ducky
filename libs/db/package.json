@@ -7,7 +7,8 @@
         "build": "tsc",
         "db-generate": "prisma generate",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "clean": "rm -rf ./node_modules ./build"
+        "clean": "rm -rf ./node_modules ./build",
+        "db:push": "DATABASE_URL='mysql://root@127.0.0.1:3309/ducky' prisma db push"
     },
     "author": "",
     "license": "ISC",

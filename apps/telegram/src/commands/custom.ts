@@ -6,7 +6,7 @@ import { logger } from '../Logger';
 import { MyContext } from '../models/Context';
 
 async function getVersion(ctx: CommandContext<MyContext>) {
-    await ctx.reply(`La version es 🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻 ${1}`);
+    await ctx.reply(`La version es 🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻🤌🏻 1.2`);
 }
 
 async function getMeme(ctx: CommandContext<MyContext>) {

@@ -1,54 +1,44 @@
-import { Command } from '@ducky/db';
+import { Birthday } from '@ducky/db';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-import { trpc } from '../utils/trpc';
+import { trpc } from '../../utils/trpc';
+import SpinnerOrLoad from '../SpinnerOrLoad';
 
-export interface TableProps {
-    commands: Command[] | undefined;
-}
-
-function MyTable({ commands }: TableProps) {
-    const deleteCommand = trpc.commands.delete.useMutation();
-    const { refetch: commandsRefetch } = trpc.commands.getAll.useQuery();
+function BirthdayTable() {
+    const birthdays = trpc.birthday.getAll.useQuery();
+    const deleteBirthday = trpc.birthday.delete.useMutation();
+    const { refetch: birthdaysRefetch } = trpc.birthday.getAll.useQuery();
     useEffect(() => {
-        if (deleteCommand.error) {
-            console.log('ojo');
+        if (deleteBirthday.error) {
             toast.error("This didn't work.");
         }
-        if (deleteCommand.data) {
-            commandsRefetch()
-                .then(() => toast.success('Command Deleted'))
+        if (deleteBirthday.data) {
+            birthdaysRefetch()
+                .then(() => toast.success('Birthdays Deleted'))
                 .catch(() => {
                     toast.error("This didn't work.");
                 });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [deleteCommand.data, deleteCommand.error]);
+    }, [deleteBirthday.data, deleteBirthday.error]);
 
-    const getLine = (command: Command) => (
+    const getLine = (birthDay: Birthday) => (
         <tr
-            key={command.id}
+            key={birthDay.id}
             className=" lg:flex-no-wrap mb-10 flex flex-row flex-wrap border border-b lg:mb-0 lg:table-row lg:flex-row ">
             <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
                 <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
-                    Matches
+                    Name
                 </span>
-                <div className="text-right text-blue-200">{command.matches}</div>
+                <div className="text-right text-blue-200">{birthDay.username}</div>
             </td>
 
             <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
                 <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
-                    Response
+                    Date
                 </span>
-                <div className="text-right text-blue-200">{command.response}</div>
-            </td>
-
-            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
-                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
-                    Last Call
-                </span>
-                <div className="text-right text-blue-200">{command.lastCall.toLocaleString()}</div>
+                <div className="text-right text-blue-200">{birthDay.day.toDateString()}</div>
             </td>
 
             <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
@@ -57,7 +47,7 @@ function MyTable({ commands }: TableProps) {
                 </span>
                 <button
                     className="btn-square btn"
-                    onClick={() => deleteCommand.mutate({ id: command.id })}>
+                    onClick={() => deleteBirthday.mutate({ id: birthDay.id })}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -76,18 +66,21 @@ function MyTable({ commands }: TableProps) {
         </tr>
     );
     return (
-        <table className="table w-fit border-collapse">
-            <thead>
-                <tr>
-                    <th className="hidden p-3 lg:table-cell">Matches</th>
-                    <th className="hidden p-3 lg:table-cell">Response</th>
-                    <th className="hidden p-3 lg:table-cell">Last Call</th>
-                    <th className="hidden p-3 lg:table-cell">Actions</th>
-                </tr>
-            </thead>
-            <tbody>{commands && commands.map((command) => getLine(command))}</tbody>
-        </table>
+        <SpinnerOrLoad isLoading={birthdays.data === undefined}>
+            <table className="table w-fit border-collapse">
+                <thead>
+                    <tr>
+                        <th className="hidden p-3 lg:table-cell">Name</th>
+                        <th className="hidden p-3 lg:table-cell">Date</th>
+                        <th className="hidden p-3 lg:table-cell">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {birthdays.data && birthdays.data.map((birthday) => getLine(birthday))}
+                </tbody>
+            </table>
+        </SpinnerOrLoad>
     );
 }
 
-export default MyTable;
+export default BirthdayTable;

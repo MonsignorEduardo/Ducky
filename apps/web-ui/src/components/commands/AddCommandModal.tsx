@@ -2,7 +2,7 @@ import { Command } from '@ducky/db';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-import { trpc } from '../utils/trpc';
+import { trpc } from '../../utils/trpc';
 
 export function AddCommandModal() {
     const addCommand = trpc.commands.add.useMutation();
@@ -26,7 +26,7 @@ export function AddCommandModal() {
         }
         if (addCommand.data) {
             commandsRefetch()
-                .then(() => toast.success('Command Deleted'))
+                .then(() => toast.success('Command Added'))
                 .catch(() => {
                     toast.error("This didn't work.");
                 });

@@ -1,10 +1,10 @@
 import { Command, prisma } from '@ducky/db';
 import { CommandContext } from 'grammy';
 
-import { logger } from '../Logger';
-import { MyContext } from '../models/Context';
-import { UserCommand } from '../models/DataComand';
-import { inTime } from './helper';
+import { logger } from '../../Logger';
+import { MyContext } from '../../models/Context';
+import { UserCommand } from '../../models/DataCommand';
+import { inTime } from '../helper';
 
 let storedCommands: Command[] = [];
 
@@ -14,22 +14,7 @@ async function populate(ctx: CommandContext<MyContext>) {
     await response.editText(`${storedCommands.length} Comandos actualizados e importados`);
 }
 
-async function create(ctx: CommandContext<MyContext>) {
-    const ctxResponse = await ctx.reply('Creando ...');
-    const [matches, response] = ctx.match.split('-');
-    const responseText = await prisma.command.create({
-        data: {
-            matches: matches,
-            type: 'text',
-            response: response,
-            timer: 60,
-        },
-    });
-    storedCommands.push(responseText);
-    await ctxResponse.editText(`Comando  creado con éxito 🤗 ${JSON.stringify(responseText)}`);
-}
-
-async function executeCommandDB(ctx: MyContext) {
+async function responseMSG(ctx: MyContext) {
     const data = await getDataCommand(ctx);
     logger.info(
         `ExecuteCommandDB | Received msg from ${ctx.from?.username ?? 'Pepe'} with message ${
@@ -107,4 +92,4 @@ const getDataCommand = async (ctx: MyContext): Promise<UserCommand | false> => {
     };
 };
 
-export { create, executeCommandDB, populate };
+export { populate, responseMSG };

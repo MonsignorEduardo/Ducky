@@ -12,10 +12,6 @@ generator client {
     previewFeatures = ["referentialIntegrity"]
 }
 
-model Example {
-    id String @id @default(cuid())
-}
-
 model Command {
     id            String   @id @default(cuid())
     type          String   @default("text")
@@ -24,6 +20,19 @@ model Command {
     extraResponse String   @default("")
     timer         Int      @default(60)
     lastCall      DateTime @default(now())
+}
+
+model Birthday {
+    id       String       @id @default(cuid())
+    username String       @unique @default("")
+    day      DateTime     @default(now())
+    user     TelegramUser @relation(fields: [username], references: [username])
+}
+
+model TelegramUser {
+    id       Int       @id @default(autoincrement())
+    username String    @unique @default("")
+    birthday Birthday?
 }
 
 // Necessary for Next auth

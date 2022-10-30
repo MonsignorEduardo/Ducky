@@ -1,36 +1,57 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { signIn, signOut } from 'next-auth/react';
-import { log } from 'next-axiom';
 
+import cumpleImg from '../../public/cumple.jpeg';
+import commandImg from '../../public/descargar.jpeg';
 import { trpc } from '../utils/trpc';
-import HomeAuth from './HomeAuth';
 
 const Home = () => {
     const auth = trpc.auth.getSession.useQuery();
     const session = auth.data;
-    log.debug('User session in', { session });
     return (
-        <>
-            {session ? (
-                <HomeAuth />
-            ) : (
-                <div className="mt-96 flex min-h-full items-center justify-around">
-                    <button
-                        className="btn"
-                        onClick={
-                            session
-                                ? () => {
-                                      void signOut();
-                                  }
-                                : () => {
-                                      void signIn();
-                                  }
-                        }>
-                        {session ? 'Sign Out' : 'Sign In'}
-                    </button>
+        <div className="flex min-h-screen flex-col items-center justify-around">
+            <div className="grid grid-cols-2 gap-4">
+                <button
+                    className="btn col-span-2"
+                    onClick={
+                        session
+                            ? () => {
+                                  void signOut();
+                              }
+                            : () => {
+                                  void signIn();
+                              }
+                    }>
+                    {session ? 'Sign Out' : 'Sign In'}
+                </button>
+                <div className="col-span-2 md:col-span-1">
+                    <Link href="/commands">
+                        <a>
+                            <Image
+                                src={commandImg}
+                                alt="Picture of the Commands"
+                                width={'200x'}
+                                height={'200px'}
+                                className="rounded-lg"></Image>
+                        </a>
+                    </Link>
                 </div>
-            )}
-        </>
+                <div className="col-span-2 md:col-span-1">
+                    <Link href="/birthdays">
+                        <a>
+                            <Image
+                                src={cumpleImg}
+                                alt="Picture of the Commands"
+                                width={'200px'}
+                                height={'200px'}
+                                className="rounded-lg"></Image>
+                        </a>
+                    </Link>
+                </div>
+            </div>
+        </div>
     );
 };
 
-export { Home };
+export default Home;
