@@ -19,8 +19,8 @@ export default function Layout({ children }: { children: JSX.Element }) {
             </Head>
             <div className="navbar bg-base-100">
                 <div className="flex-1">
-                    <Link href="/">
-                        <a className="btn-ghost btn text-xl normal-case text-blue-500">Ducky</a>
+                    <Link href="/" className="btn-ghost btn text-xl normal-case text-blue-500">
+                        Ducky
                     </Link>
                 </div>
 
@@ -31,7 +31,9 @@ export default function Layout({ children }: { children: JSX.Element }) {
                                 <Image
                                     src={session?.user?.image ?? '/favicon.ico'}
                                     alt=""
-                                    layout="fill"
+                                    width={'200'}
+                                    height={'200'}
+                                    className="rounded-lg"
                                     onClick={() => void signOut()}
                                 />
                             </div>

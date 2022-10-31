@@ -27,26 +27,22 @@ const Home = () => {
                 </button>
                 <div className="col-span-2 md:col-span-1">
                     <Link href="/commands">
-                        <a>
-                            <Image
-                                src={commandImg}
-                                alt="Picture of the Commands"
-                                width={'200x'}
-                                height={'200px'}
-                                className="rounded-lg"></Image>
-                        </a>
+                        <Image
+                            src={commandImg}
+                            alt="Picture of the Commands"
+                            width={'200'}
+                            height={'200'}
+                            className="rounded-lg"></Image>
                     </Link>
                 </div>
                 <div className="col-span-2 md:col-span-1">
                     <Link href="/birthdays">
-                        <a>
-                            <Image
-                                src={cumpleImg}
-                                alt="Picture of the Commands"
-                                width={'200px'}
-                                height={'200px'}
-                                className="rounded-lg"></Image>
-                        </a>
+                        <Image
+                            src={cumpleImg}
+                            alt="Picture of the Commands"
+                            width={'200'}
+                            height={'200'}
+                            className="rounded-lg"></Image>
                     </Link>
                 </div>
             </div>

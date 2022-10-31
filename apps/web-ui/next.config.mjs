@@ -25,13 +25,7 @@ export default defineNextConfig(
             defaultLocale: 'en',
         },
         images: {
-            remotePatterns: [
-                {
-                    protocol: 'https',
-                    hostname: 'cdn.discordapp.com',
-                    pathname: '/avatars/**',
-                },
-            ],
+            domains: ['cdn.discordapp.com'],
         },
     })
 );

@@ -1,4 +1,3 @@
-import { Birthday } from '@ducky/db';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
