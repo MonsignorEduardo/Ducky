@@ -2,19 +2,20 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
+import { env } from './env/server.mjs';
+
 export async function middleware(request: NextRequest) {
-    console.log('Middler ware working');
+    console.log('Middleware ware working');
     const token = await getToken({
         req: request,
-        secret: process.env.NEXTAUTH_SECRET,
+        secret: env.NEXTAUTH_SECRET,
+        secureCookie: env.SECURE_TOKEN === 'true',
     });
     console.log('🚀 ~ file: middleware.ts ~ line 10 ~ middleware ~ token', token);
 
     if (!token) {
         // If the user is not authenticated, redirects to the login page https://nextjs.org/docs/api-reference/next/server#static-methods
-        return NextResponse.redirect(
-            new URL('api/auth/signin?callbackUrl=https%3A%2F%2Fducky.monsignor.xyz%2F', request.url)
-        );
+        return NextResponse.redirect(new URL('/', request.url));
     }
 
     return NextResponse.next();

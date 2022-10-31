@@ -1,5 +1,5 @@
 // @ts-check
-import { z } from 'zod';
+import { boolean, z } from 'zod';
 
 /**
  * Specify your server-side environment variables schema here.
@@ -16,6 +16,7 @@ export const serverSchema = z.object({
         // VERCEL_URL doesnt include `https` so it cant be validated as a URL
         process.env.VERCEL ? z.string() : z.string().url()
     ),
+    SECURE_TOKEN: z.string(),
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
 });
