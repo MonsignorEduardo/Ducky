@@ -21,7 +21,6 @@ export function AddCommandModal() {
     };
     useEffect(() => {
         if (addCommand.error) {
-            console.log('ojo');
             toast.error("This didn't work.");
         }
         if (addCommand.data) {

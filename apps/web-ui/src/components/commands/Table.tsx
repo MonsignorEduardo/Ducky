@@ -13,7 +13,6 @@ function MyTable({ commands }: TableProps) {
     const { refetch: commandsRefetch } = trpc.commands.getAll.useQuery();
     useEffect(() => {
         if (deleteCommand.error) {
-            console.log('ojo');
             toast.error("This didn't work.");
         }
         if (deleteCommand.data) {

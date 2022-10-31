@@ -8,13 +8,12 @@ import { trpc } from '../../utils/trpc';
 export default function Layout({ children }: { children: JSX.Element }) {
     const auth = trpc.auth.getSession.useQuery();
     const session = auth.data;
-    console.log('🚀 ~ file: layout.tsx ~ line 10 ~ Layout ~ session', session);
 
     return (
         <>
             <Head>
-                <title>Ducky Commands</title>
-                <meta name="description" content="Create your custom command for ducky" />
+                <title>Ducky</title>
+                <meta name="description" content="Work With Ducky" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="navbar bg-base-100">

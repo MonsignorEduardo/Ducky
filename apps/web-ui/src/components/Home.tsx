@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, signOut } from 'next-auth/react';
 
-import cumpleImg from '../../public/cumple.jpeg';
-import commandImg from '../../public/descargar.jpeg';
 import { trpc } from '../utils/trpc';
 
 const Home = () => {
@@ -26,22 +24,22 @@ const Home = () => {
                     {session ? 'Sign Out' : 'Sign In'}
                 </button>
                 <div className="col-span-2 md:col-span-1">
-                    <Link href="/commands">
+                    <Link href="/commands" prefetch={false}>
                         <Image
-                            src={commandImg}
+                            src={'/descargar.jpeg'}
                             alt="Picture of the Commands"
-                            width={'200'}
-                            height={'200'}
+                            width={300}
+                            height={300}
                             className="rounded-lg"></Image>
                     </Link>
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                    <Link href="/birthdays">
+                    <Link href="/birthdays" prefetch={false}>
                         <Image
-                            src={cumpleImg}
-                            alt="Picture of the Commands"
-                            width={'200'}
-                            height={'200'}
+                            src={'/cumple.jpeg'}
+                            alt="Picture of the birthdays"
+                            width={300}
+                            height={300}
                             className="rounded-lg"></Image>
                     </Link>
                 </div>
