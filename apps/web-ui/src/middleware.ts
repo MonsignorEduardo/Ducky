@@ -2,14 +2,12 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { env } from './env/server.mjs';
-
 export async function middleware(request: NextRequest) {
     console.log('Middleware working');
     const token = await getToken({
         req: request,
-        secret: env.NEXTAUTH_SECRET,
-        secureCookie: env.SECURE_TOKEN === 'true',
+        secret: process.env.NEXTAUTH_SECRET,
+        secureCookie: process.env.SECURE_TOKEN === 'true',
     });
     console.log('🚀 ~ file: middleware.ts ~ line 10 ~ middleware ~ token', token);
 
