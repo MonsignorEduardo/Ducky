@@ -61,6 +61,9 @@ const main = async () => {
         logger.info(`Web server started at ${port}`);
     });
 
+    app.get('/', (req, res) => {
+        res.send('Alive'.trim());
+    });
     await bot.start();
 };
 
