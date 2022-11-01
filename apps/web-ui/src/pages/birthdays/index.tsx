@@ -9,10 +9,10 @@ const Commands = () => {
                     <span className="text-white">Birthdays</span>
                 </h1>
                 <BirthdayTable />
-                <label htmlFor="addBirthDayModal" className="modal-button btn">
+                {/* <label htmlFor="addBirthDayModal" className="modal-button btn">
                     Add Birthday
                 </label>
-                {/* <AddBirthDayModal /> */}
+                 <AddBirthDayModal />  */}
             </div>
         </Layout>
     );
