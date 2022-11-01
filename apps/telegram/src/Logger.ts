@@ -17,8 +17,12 @@ if (process.env.NODE_ENV != 'production') {
     );
 }
 logger.info({
-    level: 'info',
-    message: 'Logger successfuly setup',
+    message: 'Logger successfully setup',
+});
+
+logger.info({
+    message: 'Environment variables ',
+    env: process.env,
 });
 
 export { logger };
