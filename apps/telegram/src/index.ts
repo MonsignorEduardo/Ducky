@@ -1,52 +1,72 @@
 import { hydrate } from '@grammyjs/hydrate';
 import express from 'express';
-import { Bot } from 'grammy';
+import { Bot, webhookCallback } from 'grammy';
 
-import { getMeme, getMyriam, getOjo, getVersion } from './commands/custom';
-import { listBirthdays, updateBirthdays } from './commands/OnDb/birthDays';
-import { populate, responseMSG } from './commands/OnDb/readMsd';
-import { logger } from './Logger';
+import { getMyriam } from './commands/getMyriam';
+import { getVersion } from './commands/getVersion';
+import { listBirthdays } from './commands/listBirthdays';
+import { updateBirthdays } from './commands/updateBirthdays';
 import type { MyContext } from './models/Context';
+import { responseMSG } from './readMsg/readMsd';
+import { logger } from './services/Logger';
 
 const telegramToken = process.env.TELEGRAM_TOKEN ?? '';
 
+const getBot = () => {
+    let bot: Bot<MyContext>;
+    if (process.env.NODE_ENV === 'development') {
+        bot = new Bot<MyContext>(telegramToken);
+    } else {
+        bot = new Bot(telegramToken, {
+            client: {
+                // We accept the drawback of webhook replies for typing status.
+                canUseWebhookReply: (method) => method === 'sendChatAction',
+            },
+        });
+    }
+
+    return bot;
+};
+
 const main = async () => {
+    // Express
     const app = express();
     const port = process.env.PORT || 3333;
     app.use(express.json()); // parse the JSON request body
+    app.listen(port, () => {
+        logger.info(`Web server started at ${port}`);
+    });
 
-    const bot = new Bot<MyContext>(telegramToken);
+    app.get('/', (req, res) => {
+        res.send('Alive'.trim());
+    });
+
+    // Telegram Bot
+    const bot = getBot();
+
     bot.use(hydrate());
     logger.info({
         message: 'DuckyBot Setting commands',
     });
 
     await bot.api.setMyCommands([
-        { command: 'meme', description: 'Dropea meme' },
-        { command: 'ojo', description: 'Ojito' },
         { command: 'myriam', description: 'Te dice su nuevo numero' },
         { command: 'version', description: 'Te dice la version del bot' },
-        { command: 'populate', description: 'Actualiza los respuestas' },
         {
-            command: 'updatecumple',
-            description: 'Añade tu fecha de cumpleaños Uso /cumpleaños 18-07-1998',
+            command: 'cc',
+            description: 'Añade tu fecha de cumpleaños Uso /cc 18-07-1998',
         },
         {
-            command: 'listcumples',
+            command: 'lc',
             description: 'Muestra todos los cumples formato Peru',
         },
     ]);
 
     // Commands
     bot.command('version', getVersion);
-    bot.command('meme', getMeme);
-    bot.command('ojo', getOjo);
     bot.command('myriam', getMyriam);
-
-    bot.command('populate', populate);
-
-    bot.command('updatecumple', updateBirthdays);
-    bot.command('listcumples', listBirthdays);
+    bot.command('cc', updateBirthdays);
+    bot.command('lc', listBirthdays);
 
     logger.info({
         message: 'DuckyBot Commands set',
@@ -57,14 +77,11 @@ const main = async () => {
         message: 'DuckyBot ready to read msg',
     });
 
-    app.listen(port, () => {
-        logger.info(`Web server started at ${port}`);
-    });
-
-    app.get('/', (req, res) => {
-        res.send('Alive'.trim());
-    });
-    await bot.start();
+    if (process.env.NODE_ENV === 'development') {
+        await bot.start();
+    } else {
+        app.use(webhookCallback(bot, 'express'));
+    }
 };
 
 void main();

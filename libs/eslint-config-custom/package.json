@@ -5,14 +5,15 @@
         "clean": "rm -rf ./node_modules ./build"
     },
     "peerDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.40.1",
-        "@typescript-eslint/parser": "^5.40.1",
-        "eslint": "*",
-        "eslint-config-prettier": "*",
-        "eslint-config-turbo": "*",
-        "eslint-plugin-react": "*",
-        "eslint-plugin-import": "*",
-        "eslint-plugin-simple-import-sort": "*",
-        "typescript": "*"
+        "@typescript-eslint/eslint-plugin": "^5.42.0",
+        "@typescript-eslint/parser": "^5.42.0",
+        "eslint": "^8.26.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-turbo": "^0.0.4",
+        "eslint-plugin-turbo": "^0.0.4",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-simple-import-sort": "^8.0.0",
+        "typescript": "^4.8.4"
     }
 }

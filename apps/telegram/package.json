@@ -14,7 +14,7 @@
         "lint": "eslint './src/**/*.ts'",
         "build": "tsc",
         "prettier": "prettier --check ./src/**",
-        "dev": "ts-node-dev -r dotenv/config ./src/index.ts",
+        "dev": "NODE_ENV=development ts-node-dev -r dotenv/config ./src/index.ts",
         "clean": "rm -rf ./node_modules ./build"
     },
     "dependencies": {
@@ -32,9 +32,17 @@
         "@ducky/eslint-config-custom": "workspace:*",
         "@types/express": "^4.17.14",
         "@types/node": "^14.11.2",
-        "eslint": "^8.0.1",
+        "@typescript-eslint/eslint-plugin": "^5.42.0",
+        "@typescript-eslint/parser": "^5.42.0",
+        "eslint": "^8.26.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-turbo": "^0.0.4",
+        "eslint-plugin-turbo": "^0.0.4",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-simple-import-sort": "^8.0.0",
         "ts-node-dev": "^2.0.0",
-        "typescript": "*"
+        "typescript": "^4.8.4"
     },
     "engines": {
         "node": ">=16.0.0"

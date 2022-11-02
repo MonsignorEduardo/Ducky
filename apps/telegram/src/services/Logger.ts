@@ -9,7 +9,7 @@ const logger = winston.createLogger({
 });
 
 // Add the console logger if we're not in production
-if (process.env.NODE_ENV != 'production') {
+if (process.env.NODE_ENV !== 'production') {
     logger.add(
         new winston.transports.Console({
             format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
@@ -18,11 +18,6 @@ if (process.env.NODE_ENV != 'production') {
 }
 logger.info({
     message: 'Logger successfully setup',
-});
-
-logger.info({
-    message: 'Environment variables ',
-    env: process.env,
 });
 
 export { logger };
