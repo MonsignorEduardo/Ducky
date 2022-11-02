@@ -13,19 +13,20 @@ import { logger } from './services/Logger';
 const telegramToken = process.env.TELEGRAM_TOKEN ?? '';
 
 const getBot = () => {
-    let bot: Bot<MyContext>;
-    if (process.env.NODE_ENV === 'development') {
-        bot = new Bot<MyContext>(telegramToken);
-    } else {
-        bot = new Bot(telegramToken, {
-            client: {
-                // We accept the drawback of webhook replies for typing status.
-                canUseWebhookReply: (method) => method === 'sendChatAction',
-            },
-        });
-    }
+    // let bot: Bot<MyContext>;
+    // if (process.env.NODE_ENV === 'development') {
+    //     bot = new Bot<MyContext>(telegramToken);
+    // } else {
+    //     bot = new Bot(telegramToken, {
+    //         client: {
+    //             // We accept the drawback of webhook replies for typing status.
+    //             canUseWebhookReply: (method) => method === 'sendChatAction',
+    //         },
+    //     });
+    // }
 
-    return bot;
+    // return bot;
+    return new Bot<MyContext>(telegramToken);
 };
 
 const main = async () => {
@@ -77,11 +78,12 @@ const main = async () => {
         message: 'DuckyBot ready to read msg',
     });
 
-    if (process.env.NODE_ENV === 'development') {
-        await bot.start();
-    } else {
-        app.use(webhookCallback(bot, 'express'));
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //     await bot.start();
+    // } else {
+    //     app.use(webhookCallback(bot, 'express'));
+    // }
+    await bot.start();
 };
 
 void main();
