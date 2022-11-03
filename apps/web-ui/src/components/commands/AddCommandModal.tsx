@@ -1,22 +1,28 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Command } from '@ducky/db';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { trpc } from '../../utils/trpc';
+
+type Inputs = {
+    matches: Command['matches'];
+    response: Command['response'];
+    // extraResponse: Command['extraResponse'];
+    type: Command['type'];
+};
 
 export function AddCommandModal() {
     const addCommand = trpc.commands.add.useMutation();
     const { refetch: commandsRefetch } = trpc.commands.getAll.useQuery();
 
-    const [command, setCommand] = useState<Pick<Command, 'matches' | 'response'>>({
-        matches: '',
-        response: '',
-    });
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const onSubmit: SubmitHandler<Inputs> = (command) => {
         addCommand.mutate({
             matches: command.matches,
             response: command.response,
+            type: command.type,
+            // extraResponse: command.extraResponse,
         });
     };
     useEffect(() => {
@@ -33,6 +39,13 @@ export function AddCommandModal() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [addCommand.data, addCommand.error]);
 
+    //Forms
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
+
     return (
         <>
             <input type="checkbox" id="inputCommandModal" className="modal-toggle" />
@@ -43,51 +56,51 @@ export function AddCommandModal() {
                         className="btn-sm btn-circle btn absolute right-2 top-2">
                         ✕
                     </label>
-
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-6">
-                            <label htmlFor="large-input" className="mb-2 block text-sm font-medium">
-                                Matches
-                            </label>
+                            <label className="mb-2 block text-sm font-medium">Matches</label>
                             <input
                                 type="text"
                                 id="large-input"
-                                value={command.matches}
-                                onChange={(e) =>
-                                    setCommand({
-                                        ...command,
-                                        matches: e.target.value,
-                                    })
-                                }
+                                {...register('matches', { required: true })}
                                 className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             />
                         </div>
                         <div className="mb-6">
-                            <label
-                                htmlFor="large-input"
-                                className="mb-2 block text-sm font-medium ">
-                                Response
-                            </label>
+                            <label className="mb-2 block text-sm font-medium ">Response</label>
                             <input
                                 type="text"
-                                id="large-input"
-                                value={command.response}
-                                onChange={(e) =>
-                                    setCommand({
-                                        ...command,
-                                        response: e.target.value,
-                                    })
-                                }
+                                {...register('response', { required: true })}
                                 className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             />
                         </div>
-
-                        <button
+                        {/* <div className="mb-6">
+                            <label className="mb-2 block text-sm font-medium ">
+                                Extra Response
+                            </label>
+                            <input
+                                type="text"
+                                {...register('extraResponse')}
+                                className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            />
+                        </div> */}
+                        <div className="mb-6">
+                            <label className="mb-2 block text-sm font-medium ">Type</label>
+                            <select
+                                defaultValue={'TEXT'}
+                                {...register('type', { required: true })}
+                                className="sm:text-md block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                                <option value="STICKER">STICKER</option>
+                                <option value="TEXT">TEXT</option>
+                                <option value="VIDEO">VIDEO</option>
+                                <option value="FOTO">FOTO</option>
+                                <option value="AUDIO">AUDIO</option>
+                            </select>
+                        </div>
+                        <input
                             type="submit"
-                            disabled={addCommand.isLoading}
-                            className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto">
-                            Submit
-                        </button>
+                            className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:w-auto"
+                        />
                     </form>
                 </div>
             </div>

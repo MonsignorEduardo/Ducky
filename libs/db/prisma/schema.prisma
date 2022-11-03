@@ -14,13 +14,21 @@ generator client {
 }
 
 model Command {
-    id            String   @id @default(cuid())
-    type          String   @default("text")
-    matches       String   @unique @default("ejemplo24")
-    response      String   @default("ejemplo24")
-    extraResponse String   @default("")
-    timer         Int      @default(60)
-    lastCall      DateTime @default(now())
+    id            String      @id @default(cuid())
+    type          CommandType @default(TEXT)
+    matches       String      @unique @default("ejemplo24")
+    response      String      @default("ejemplo24")
+    extraResponse String      @default("")
+    timer         Int         @default(60)
+    lastCall      DateTime    @default(now())
+}
+
+enum CommandType {
+    STICKER
+    TEXT
+    VIDEO
+    FOTO
+    AUDIO
 }
 
 model Birthday {

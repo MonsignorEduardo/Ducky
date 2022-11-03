@@ -38,10 +38,24 @@ function MyTable({ commands }: TableProps) {
 
             <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
                 <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
+                    Matches
+                </span>
+                <div className="text-right text-blue-200">{command.type}</div>
+            </td>
+
+            <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
                     Response
                 </span>
                 <div className="text-right text-blue-200">{command.response}</div>
             </td>
+
+            {/* <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
+                <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
+                    Extra Response
+                </span>
+                <div className="text-right text-blue-200">{command.extraResponse}</div>
+            </td> */}
 
             <td className="relative w-full p-3 text-center text-gray-800 lg:static lg:table-cell lg:w-auto">
                 <span className="absolute top-3 left-2 bg-blue-200 px-2 py-1 text-xs font-bold uppercase lg:hidden">
@@ -79,7 +93,9 @@ function MyTable({ commands }: TableProps) {
             <thead>
                 <tr>
                     <th className="hidden p-3 lg:table-cell">Matches</th>
+                    <th className="hidden p-3 lg:table-cell">Type</th>
                     <th className="hidden p-3 lg:table-cell">Response</th>
+                    {/* <th className="hidden p-3 lg:table-cell">Extra Response</th> */}
                     <th className="hidden p-3 lg:table-cell">Last Call</th>
                     <th className="hidden p-3 lg:table-cell">Actions</th>
                 </tr>

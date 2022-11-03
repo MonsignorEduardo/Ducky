@@ -12,19 +12,25 @@ export const commandsRouter = router({
         .input(
             z.object({
                 matches: z.string().min(1).max(20),
-                response: z.string().min(1).max(20),
+                type: z.enum(['STICKER', 'TEXT', 'VIDEO', 'FOTO', 'AUDIO']),
+                response: z.string().min(1).max(50),
+                extraResponse: z.string().optional(),
             })
         )
         .mutation(async ({ input, ctx }) => {
             try {
                 log.info('CommandsRouter create', {
                     matches: input.matches,
+                    type: input.type,
                     response: input.response,
+                    extraResponse: input.extraResponse,
                 });
                 return await ctx.prisma.command.create({
                     data: {
                         matches: input.matches,
                         response: input.response,
+                        type: input.type,
+                        extraResponse: input.extraResponse,
                     },
                 });
             } catch (error) {

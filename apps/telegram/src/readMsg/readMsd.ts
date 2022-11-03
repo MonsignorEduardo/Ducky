@@ -35,27 +35,27 @@ async function responseMSG(ctx: MyContext) {
             }
             logger.info('Ejecutando  commando', { command });
             switch (command.type) {
-                case 'sticker':
+                case 'STICKER':
                     await ctx.replyWithSticker(command.response, {
                         reply_to_message_id: message_id,
                     });
                     break;
-                case 'text':
+                case 'TEXT':
                     await ctx.reply(command.response, {
                         reply_to_message_id: message_id,
                     });
                     break;
-                case 'video':
+                case 'VIDEO':
                     await ctx.replyWithVideo(command.response, {
                         reply_to_message_id: message_id,
                     });
                     break;
-                case 'foto':
+                case 'FOTO':
                     await ctx.replyWithPhoto(command.response, {
                         reply_to_message_id: message_id,
                     });
                     break;
-                case 'audio':
+                case 'AUDIO':
                     await ctx.replyWithAudio(command.response, {
                         reply_to_message_id: message_id,
                     });
@@ -64,7 +64,7 @@ async function responseMSG(ctx: MyContext) {
                     break;
             }
 
-            if (command.extraResponse && command.type !== 'sticker') {
+            if (command.extraResponse && command.type !== 'STICKER') {
                 await ctx.reply(command.extraResponse, {
                     reply_to_message_id: message_id,
                 });

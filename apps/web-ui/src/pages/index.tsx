@@ -1,4 +1,3 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { NextPage } from 'next';
 import { Toaster } from 'react-hot-toast';
 
@@ -8,7 +7,6 @@ const index: NextPage = () => {
     return (
         <>
             <Home />
-            <ReactQueryDevtools initialIsOpen={false} />
             <Toaster />
         </>
     );
